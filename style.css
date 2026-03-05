@@ -766,5 +766,25 @@ video.hidden {
 
     .pdf-viewer-container {
         padding: 12px;
+        -webkit-overflow-scrolling: touch;
+        /* smooth scrolling for iOS */
     }
+}
+
+/* iOS Fullscreen Polyfill */
+.ios-fullscreen {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 9999 !important;
+    background: var(--bg-main) !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.ios-fullscreen iframe {
+    border-radius: 0 !important;
+    border: none !important;
 }

@@ -238,7 +238,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Ensure iframe src is set
-        pdfFrame.src = pdfUrl + "#toolbar=0&navpanes=0";
+        // Fix iOS/Mobile native PDF viewer rendering bugs by wrapping in GDocs Viewer conditionally
+        const isMobile = window.innerWidth <= 850 || /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        if (isMobile) {
+            pdfFrame.src = `https://docs.google.com/gview?url=${encodeURIComponent(pdfUrl)}&embedded=true`;
+        } else {
+            pdfFrame.src = pdfUrl + "#toolbar=0&navpanes=0&view=FitH";
+        }
+
         videoFrame.src = currentVideoUrl;
 
         // Hide empty state
@@ -490,21 +498,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fullscreen Toggle
     fullscreenBtn.addEventListener('click', () => {
-        if (!document.fullscreenElement) {
-            if (pdfContainer.requestFullscreen) {
-                pdfContainer.requestFullscreen();
-            } else if (pdfContainer.webkitRequestFullscreen) { /* Safari */
-                pdfContainer.webkitRequestFullscreen();
-            } else if (pdfContainer.msRequestFullscreen) { /* IE11 */
-                pdfContainer.msRequestFullscreen();
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+        if (isVideoMode && currentVideoUrl) {
+            if (videoFrame.requestFullscreen) {
+                videoFrame.requestFullscreen();
+            } else if (videoFrame.webkitEnterFullscreen) { // iOS Native Player
+                videoFrame.webkitEnterFullscreen();
+            } else if (videoFrame.webkitRequestFullscreen) {
+                videoFrame.webkitRequestFullscreen();
+            } else if (videoFrame.msRequestFullscreen) {
+                videoFrame.msRequestFullscreen();
             }
         } else {
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-            } else if (document.webkitExitFullscreen) { /* Safari */
-                document.webkitExitFullscreen();
-            } else if (document.msExitFullscreen) { /* IE11 */
-                document.msExitFullscreen();
+            // For Slides
+            if (isIOS) {
+                pdfContainer.classList.toggle('ios-fullscreen');
+                if (pdfContainer.classList.contains('ios-fullscreen')) {
+                    fullscreenBtn.innerHTML = '<i class="fa-solid fa-compress"></i>';
+                } else {
+                    fullscreenBtn.innerHTML = '<i class="fa-solid fa-expand"></i>';
+                }
+            } else {
+                if (!document.fullscreenElement) {
+                    if (pdfContainer.requestFullscreen) {
+                        pdfContainer.requestFullscreen();
+                    } else if (pdfContainer.webkitRequestFullscreen) {
+                        pdfContainer.webkitRequestFullscreen();
+                    } else if (pdfContainer.msRequestFullscreen) {
+                        pdfContainer.msRequestFullscreen();
+                    }
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    } else if (document.msExitFullscreen) {
+                        document.msExitFullscreen();
+                    }
+                }
             }
         }
     });
