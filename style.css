@@ -738,12 +738,10 @@ video.hidden {
     }
 
     .topbar {
-        padding: 0 16px;
+        padding: max(16px, env(safe-area-inset-top)) 16px 16px 16px;
         flex-wrap: wrap;
         height: auto;
         min-height: 60px;
-        padding-top: 10px;
-        padding-bottom: 10px;
         gap: 12px;
     }
 
@@ -787,4 +785,24 @@ video.hidden {
 .ios-fullscreen iframe {
     border-radius: 0 !important;
     border: none !important;
+}
+
+.ios-fullscreen #iosExitFsBtn {
+    display: flex !important;
+}
+
+.ios-exit-fs-btn {
+    position: fixed;
+    bottom: max(32px, env(safe-area-inset-bottom));
+    right: 32px;
+    z-index: 10001;
+    background: var(--bg-secondary) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    width: 48px !important;
+    height: 48px !important;
+    border: 1px solid var(--border) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important;
+    display: none;
+    margin: 0;
 }

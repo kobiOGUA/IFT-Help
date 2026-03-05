@@ -152,6 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebar = document.getElementById('sidebar');
     const sidebarOverlay = document.getElementById('sidebarOverlay');
     const fullscreenBtn = document.getElementById('fullscreenBtn');
+    const iosExitFsBtn = document.getElementById('iosExitFsBtn');
     const pdfContainer = document.getElementById('pdfContainer');
 
     let currentPdfUrl = '';
@@ -471,10 +472,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     showLinksBtn.addEventListener('click', () => {
+        closeMobileMenu();
         welcomeModal.classList.add('active');
     });
 
     startTutorialBtn.addEventListener('click', () => {
+        closeMobileMenu();
         currentTutStep = 0;
         renderTutorialStep();
         tutorialModal.classList.add('active');
@@ -513,12 +516,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             // For Slides
             if (isIOS) {
-                pdfContainer.classList.toggle('ios-fullscreen');
-                if (pdfContainer.classList.contains('ios-fullscreen')) {
-                    fullscreenBtn.innerHTML = '<i class="fa-solid fa-compress"></i>';
-                } else {
-                    fullscreenBtn.innerHTML = '<i class="fa-solid fa-expand"></i>';
-                }
+                pdfContainer.classList.add('ios-fullscreen');
             } else {
                 if (!document.fullscreenElement) {
                     if (pdfContainer.requestFullscreen) {
@@ -539,6 +537,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }
+    });
+
+    fullscreenBtn.addEventListener('click', () => {
+        // defined above
+    }); // we already handle this inside the block, just adding a new click listener below
+
+    iosExitFsBtn.addEventListener('click', () => {
+        pdfContainer.classList.remove('ios-fullscreen');
     });
 
     renderNavigation();
