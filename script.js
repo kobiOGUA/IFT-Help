@@ -148,6 +148,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnSlides = document.getElementById('btnSlides');
     const btnVideo = document.getElementById('btnVideo');
     const videoFrame = document.getElementById('videoFrame');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    const pdfContainer = document.getElementById('pdfContainer');
 
     let currentPdfUrl = '';
     let currentVideoUrl = '';
@@ -239,6 +244,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Hide empty state
         emptyState.classList.add('hidden');
         renderMediaState();
+        closeMobileMenu();
+    }
+
+    function closeMobileMenu() {
+        sidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('active');
     }
 
     function renderMediaState() {
@@ -466,6 +477,35 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target === welcomeModal) {
             welcomeModal.classList.remove('active');
             localStorage.setItem('kobiHelpVisited', 'true');
+        }
+    });
+
+    // Mobile Sidebar Setup
+    mobileMenuBtn.addEventListener('click', () => {
+        sidebar.classList.add('open');
+        sidebarOverlay.classList.add('active');
+    });
+
+    sidebarOverlay.addEventListener('click', closeMobileMenu);
+
+    // Fullscreen Toggle
+    fullscreenBtn.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+            if (pdfContainer.requestFullscreen) {
+                pdfContainer.requestFullscreen();
+            } else if (pdfContainer.webkitRequestFullscreen) { /* Safari */
+                pdfContainer.webkitRequestFullscreen();
+            } else if (pdfContainer.msRequestFullscreen) { /* IE11 */
+                pdfContainer.msRequestFullscreen();
+            }
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) { /* Safari */
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) { /* IE11 */
+                document.msExitFullscreen();
+            }
         }
     });
 

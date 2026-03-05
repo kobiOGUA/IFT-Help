@@ -10,7 +10,7 @@
     <link rel="apple-touch-icon" href="logo.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="IFT212 Help">
+    <meta name="apple-mobile-web-app-title" content="Kobi's IFT">
     <!-- Assets -->
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -19,8 +19,11 @@
 
 <body>
     <div class="app-container">
+        <!-- Mobile Overlay -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
         <!-- Sidebar Navigation -->
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <h2><i class="fa-solid fa-microchip"></i> Kobi's IFT212 Help</h2>
                 <p>Computer Architecture & Organization</p>
@@ -47,6 +50,8 @@
         <main class="main-content">
             <header class="topbar">
                 <div class="current-selection">
+                    <button class="icon-btn mobile-menu-btn" id="mobileMenuBtn" style="display:none;"><i
+                            class="fa-solid fa-bars"></i></button>
                     <span id="currentChapterLabel">Select a Chapter</span>
                     <i class="fa-solid fa-chevron-right separator" style="display:none;"></i>
                     <span id="currentSubchapterLabel" class="highlight"></span>
@@ -61,6 +66,8 @@
                 </div>
 
                 <div class="actions">
+                    <button class="icon-btn" id="fullscreenBtn" title="Fullscreen"><i
+                            class="fa-solid fa-expand"></i></button>
                     <button class="icon-btn" id="openExternalBtn" title="Open in new tab"><i
                             class="fa-solid fa-external-link-alt"></i></button>
                     <button class="icon-btn theme-toggle" id="themeToggle"><i class="fa-solid fa-moon"></i></button>
