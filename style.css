@@ -305,15 +305,37 @@ body {
 }
 
 .topbar {
-    height: 60px;
     padding: 0 24px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     background: var(--bg-secondary);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border);
+    min-height: 60px;
+}
+
+.topbar-main-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 0;
+}
+
+/* On desktop, hide label row separately and keep old single-row behaviour */
+.current-selection {
+    display: none;
+    /* hidden on desktop, shown on mobile */
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    padding-bottom: 8px;
+    gap: 6px;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .current-selection {
@@ -324,6 +346,33 @@ body {
     gap: 8px;
     flex: 1;
     /* allow center alignment of toggle */
+}
+
+/* Desktop keeps old breadcrumb visible in topbar-main-row */
+@media (min-width: 851px) {
+    .topbar {
+        flex-direction: row;
+        align-items: center;
+        padding: 0 24px;
+        min-height: 60px;
+    }
+
+    .topbar>.current-selection {
+        display: flex;
+        flex: 1;
+        padding-bottom: 0;
+        font-size: 0.95rem;
+        font-weight: 500;
+    }
+
+    .topbar-main-row {
+        display: contents;
+        /* dissolve the row wrapper on desktop */
+    }
+
+    #mobileMenuBtn {
+        display: none !important;
+    }
 }
 
 #currentChapterLabel {
@@ -732,24 +781,26 @@ video.hidden {
 
     #mobileMenuBtn {
         display: inline-flex !important;
-        margin-right: 8px;
         margin-left: 0;
         border: none;
+        flex-shrink: 0;
     }
 
     .topbar {
-        padding: max(16px, env(safe-area-inset-top)) 16px 16px 16px;
-        flex-wrap: wrap;
-        height: auto;
-        min-height: 60px;
-        gap: 12px;
+        padding: 0 16px;
+        padding-top: env(safe-area-inset-top);
+    }
+
+    .topbar-main-row {
+        padding: 8px 0;
     }
 
     .current-selection {
-        flex: 1 1 100%;
-        order: -1;
-        margin-bottom: 4px;
-        font-size: 0.85rem;
+        display: flex;
+        /* show breadcrumb label on mobile */
+        font-size: 0.8rem;
+        padding: 0 0 8px 0;
+        color: var(--text-muted);
     }
 
     .media-toggle-container {

@@ -49,28 +49,33 @@
         <!-- Main Content Area -->
         <main class="main-content">
             <header class="topbar">
-                <div class="current-selection">
-                    <button class="icon-btn mobile-menu-btn" id="mobileMenuBtn" style="display:none;"><i
+                <!-- Top row: hamburger + spacer + action icons -->
+                <div class="topbar-main-row">
+                    <button class="icon-btn" id="mobileMenuBtn" style="display:none;"><i
                             class="fa-solid fa-bars"></i></button>
-                    <span id="currentChapterLabel">Select a Chapter</span>
-                    <i class="fa-solid fa-chevron-right separator" style="display:none;"></i>
-                    <span id="currentSubchapterLabel" class="highlight"></span>
-                </div>
 
-                <div class="media-toggle-container" id="mediaToggleContainer" style="display:none;">
-                    <div class="segmented-control">
-                        <button class="segment active" id="btnSlides"><i class="fa-solid fa-file-pdf"></i>
-                            Slides</button>
-                        <button class="segment" id="btnVideo"><i class="fa-solid fa-video"></i> Video</button>
+                    <div class="media-toggle-container" id="mediaToggleContainer" style="display:none;">
+                        <div class="segmented-control">
+                            <button class="segment active" id="btnSlides"><i class="fa-solid fa-file-pdf"></i>
+                                Slides</button>
+                            <button class="segment" id="btnVideo"><i class="fa-solid fa-video"></i> Video</button>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button class="icon-btn" id="fullscreenBtn" title="Fullscreen"><i
+                                class="fa-solid fa-expand"></i></button>
+                        <button class="icon-btn" id="openExternalBtn" title="Open in new tab"><i
+                                class="fa-solid fa-external-link-alt"></i></button>
+                        <button class="icon-btn theme-toggle" id="themeToggle"><i class="fa-solid fa-moon"></i></button>
                     </div>
                 </div>
 
-                <div class="actions">
-                    <button class="icon-btn" id="fullscreenBtn" title="Fullscreen"><i
-                            class="fa-solid fa-expand"></i></button>
-                    <button class="icon-btn" id="openExternalBtn" title="Open in new tab"><i
-                            class="fa-solid fa-external-link-alt"></i></button>
-                    <button class="icon-btn theme-toggle" id="themeToggle"><i class="fa-solid fa-moon"></i></button>
+                <!-- Second row (mobile): breadcrumb label -->
+                <div class="current-selection">
+                    <span id="currentChapterLabel">Select a Chapter</span>
+                    <i class="fa-solid fa-chevron-right separator" style="display:none;"></i>
+                    <span id="currentSubchapterLabel" class="highlight"></span>
                 </div>
             </header>
 
