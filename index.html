@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kobi's IFT212 Help!</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fa-solid fa-microchip"></i> Kobi's IFT212 Help</h2>
+                <p>Computer Architecture & Organization</p>
+            </div>
+
+            <div class="search-box">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search subchapters...">
+            </div>
+
+            <nav class="chapter-nav" id="chapterNav">
+                <!-- Dynamically populated by JS -->
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="footer-btn" id="showLinksBtn"><i class="fa-solid fa-user-group"></i> About &
+                    Links</button>
+                <button class="footer-btn" id="startTutorialBtn"><i class="fa-solid fa-circle-question"></i> How to
+                    Use</button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="topbar">
+                <div class="current-selection">
+                    <span id="currentChapterLabel">Select a Chapter</span>
+                    <i class="fa-solid fa-chevron-right separator" style="display:none;"></i>
+                    <span id="currentSubchapterLabel" class="highlight"></span>
+                </div>
+
+                <div class="media-toggle-container" id="mediaToggleContainer" style="display:none;">
+                    <div class="segmented-control">
+                        <button class="segment active" id="btnSlides"><i class="fa-solid fa-file-pdf"></i>
+                            Slides</button>
+                        <button class="segment" id="btnVideo"><i class="fa-solid fa-video"></i> Video</button>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button class="icon-btn" id="openExternalBtn" title="Open in new tab"><i
+                            class="fa-solid fa-external-link-alt"></i></button>
+                    <button class="icon-btn theme-toggle" id="themeToggle"><i class="fa-solid fa-moon"></i></button>
+                </div>
+            </header>
+
+            <div class="pdf-viewer-container" id="pdfContainer">
+                <div class="empty-state" id="emptyState">
+                    <i class="fa-solid fa-book-open"></i>
+                    <h3>Welcome to IFT212 Study Portal</h3>
+                    <p>Select a subchapter from the menu to begin reading your perfected lecture notes.</p>
+                </div>
+                <!-- PDF Iframe -->
+                <iframe id="pdfFrame" class="hidden"></iframe>
+                <!-- Video Player -->
+                <video id="videoFrame" class="hidden" controls controlsList="nodownload"></video>
+            </div>
+        </main>
+    </div>
+
+    <!-- Welcome Modal -->
+    <div class="modal-overlay" id="welcomeModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModalBtn"><i class="fa-solid fa-times"></i></button>
+            <div class="modal-header">
+                <h2>👋 Hey guys, I'm Kobi!</h2>
+            </div>
+            <div class="modal-body">
+                <p>Basically, I find this course really challenging, so I built this entire study portal to help me (and
+                    hopefully you!) understand the material a bit better by breaking down the PowerPoints and Videos
+                    into much more manageable chunks.</p>
+
+                <div class="social-links">
+                    <a href="https://chat.whatsapp.com/I6QDP1DrQ3l8NHtm8RsQyV" target="_blank"
+                        class="social-btn whatsapp pulse-btn">
+                        <i class="fa-brands fa-whatsapp"></i> Join My Study Group!
+                    </a>
+                    <div class="secondary-socials">
+                        <a href="https://www.tiktok.com/@kobiogua" target="_blank" class="social-btn tiktok">
+                            <i class="fa-brands fa-tiktok"></i> TikTok
+                        </a>
+                        <a href="https://www.snapchat.com/@kobiogua?invite_id=nEmSV_dk&locale=en_NG&share_id=lLc8sV4ETSq1s_mLpYoE-A&sid=140de8b6521e47dc90faf5a9cbfdf2ce"
+                            target="_blank" class="social-btn snapchat">
+                            <i class="fa-brands fa-snapchat"></i> Snapchat
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tutorial Modal -->
+    <div class="modal-overlay" id="tutorialModal">
+        <div class="modal-content tutorial-content">
+            <button class="modal-close" id="closeTutBtn"><i class="fa-solid fa-times"></i></button>
+            <div class="modal-header">
+                <h2 id="tutTitle">How to study smartly</h2>
+            </div>
+            <div class="modal-body">
+                <p id="tutText">Let's walk through how to use this study portal.</p>
+                <div class="tut-progress-bar">
+                    <div class="tut-progress-fill" id="tutProgressFill"></div>
+                </div>
+            </div>
+            <div class="tut-actions">
+                <button class="social-btn snapchat" id="tutPrevBtn" style="color:#000; display:none;"><i
+                        class="fa-solid fa-arrow-left"></i> Back</button>
+                <button class="social-btn whatsapp" id="tutNextBtn">Next <i
+                        class="fa-solid fa-arrow-right"></i></button>
+                <button class="social-btn tiktok" id="tutFinishBtn" style="display:none;"><i
+                        class="fa-solid fa-check"></i> Got it!</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
