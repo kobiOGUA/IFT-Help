@@ -33,11 +33,13 @@
 body {
     background-color: var(--bg-main);
     color: var(--text-main);
-    height: 100vh;
+    height: 100dvh;
     overflow: hidden;
     transition: background-color 0.3s, color 0.3s;
     background-image: radial-gradient(circle at top right, rgba(59, 130, 246, 0.15) 0%, transparent 40%),
         radial-gradient(circle at bottom left, rgba(139, 92, 246, 0.15) 0%, transparent 40%);
+    /* Push entire app below Dynamic Island / notch on iOS */
+    padding-top: env(safe-area-inset-top);
 }
 
 .app-container {
@@ -750,7 +752,7 @@ video.hidden {
     .sidebar {
         position: fixed;
         left: 0;
-        top: 0;
+        top: env(safe-area-inset-top);
         bottom: 0;
         z-index: 1001;
         transform: translateX(-100%);
@@ -787,7 +789,7 @@ video.hidden {
     }
 
     .topbar {
-        padding: env(safe-area-inset-top) 16px 0 16px;
+        padding: 0 16px;
     }
 
     .topbar-main-row {
