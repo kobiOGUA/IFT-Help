@@ -787,12 +787,11 @@ video.hidden {
     }
 
     .topbar {
-        padding: 0 16px;
-        padding-top: env(safe-area-inset-top);
+        padding: env(safe-area-inset-top) 16px 0 16px;
     }
 
     .topbar-main-row {
-        padding: 8px 0;
+        padding: 10px 0;
     }
 
     .current-selection {
